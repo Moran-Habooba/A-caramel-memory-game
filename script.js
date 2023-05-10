@@ -159,6 +159,8 @@ const playerName = document.querySelector(".playerName");
 const startGame = document.querySelector(".startGame");
 const levels = document.querySelector(".levels");
 
+let level2 = false;
+
 btn_startGame.addEventListener("click", startTheGame);
 
 function startTheGame() {
@@ -207,11 +209,13 @@ function resetFlippedTiles() {
   flippedTiles = [];
 }
 function checkWin() {
-  if (matchesTiles.length === tiles.length) {
+  if (matchesTiles.length === tiles.length && !level2) {
     $pairsFound.textContent = "";
     gameZone.innerHTML = "";
     const winTitle = document.querySelector(".win-title");
     winTitle.innerHTML = "👏👏👏 עברת לשלב הבא ";
+    setTimeout(() => goToNextLevel(), 3000);
+
     // const endTime = Date.now();
     // const timeElapsed = new Date(endTime - startTime);
     // const minutes = timeElapsed.getMinutes();
@@ -224,9 +228,8 @@ function checkWin() {
     // )}`;
     // updateShortestTime();
   } else {
-    return;
+    return checkEndGame();
   }
-  setTimeout(() => goToNextLevel(), 3000);
 }
 function resetFlippedTiles() {
   $flippedTiles = [];
@@ -274,6 +277,7 @@ function updateShortestTime() {
 // שלב 2
 
 function goToNextLevel() {
+  level2 = true;
   levels.innerHTML = `שלב 2`;
   document.querySelector(".saveTime").innerHTML = "";
   document.querySelector(".timer").innerHTML = "";
@@ -284,9 +288,6 @@ function goToNextLevel() {
   resetGame();
   $pairsFound.innerHTML = `זוגות שנמצאו - ${matchesTiles.length / 2}`;
   checkTilesMatch();
-  if (matchesTiles.length === tiles.length) {
-    checkEndGame();
-  }
 }
 
 function resetGame() {
@@ -315,8 +316,4 @@ function checkEndGame() {
 function flipAllTiles() {
   matchesTiles.length = tiles.length;
   checkWin();
-}
-function flipAllTilesLevel() {
-  matchesTiles.length = tiles.length;
-  checkEndGame();
 }
