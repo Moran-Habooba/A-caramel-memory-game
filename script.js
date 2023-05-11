@@ -215,22 +215,13 @@ function checkWin() {
     const winTitle = document.querySelector(".win-title");
     winTitle.innerHTML = "👏👏👏 עברת לשלב הבא ";
     setTimeout(() => goToNextLevel(), 3000);
-
-    // const endTime = Date.now();
-    // const timeElapsed = new Date(endTime - startTime);
-    // const minutes = timeElapsed.getMinutes();
-    // const seconds = timeElapsed.getSeconds();
-
-    // document.querySelector(
-    //   ".timer"
-    // ).textContent = `הזמן שעבר מתחילת המשחק: ${secondsToFormattedTime(
-    //   timeCounter
-    // )}`;
-    // updateShortestTime();
   } else {
-    return checkEndGame();
+    if (matchesTiles.length === tiles.length) {
+      return checkEndGame();
+    }
   }
 }
+
 function resetFlippedTiles() {
   $flippedTiles = [];
   flippedTiles = [];
