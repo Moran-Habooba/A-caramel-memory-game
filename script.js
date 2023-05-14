@@ -174,6 +174,11 @@ const levels = document.querySelector(".levels");
 let level2 = false;
 
 btn_startGame.addEventListener("click", startTheGame);
+document.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    startTheGame();
+  }
+});
 
 function startTheGame() {
   if (playerName.value.length >= 2) {
