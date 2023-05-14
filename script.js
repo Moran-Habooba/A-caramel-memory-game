@@ -109,6 +109,17 @@ function createTiles(tilesNumber) {
   }
   return tiles;
 }
+
+function playSound(audio) {
+  const sound = document.getElementById("sound");
+  audio = new Audio(`./Cartoon Weird Noise Short Mouth Popping 02.mp3`);
+  sound.play();
+}
+function playSoundEndGame() {
+  sound.src = "./Audience Clapping - Sound Effect  מחיאת כפיים.mp3";
+  sound.play();
+}
+
 // RENDER
 
 const gameZone = document.getElementById("game-zone");
@@ -123,6 +134,7 @@ let timeCounter = 0;
 
 gameZone.addEventListener("click", (e) => {
   if (e.target.matches(".back-tile") && !pauseGame) {
+    playSound();
     $flippedTiles.push(e.target);
     const tileId = Number(e.target.closest(".tile-container").dataset.tileId);
     renderFlipTile(tileId);
@@ -294,13 +306,14 @@ function checkEndGame() {
   gameZone.innerHTML = "";
   const winTitle = document.querySelector(".win-title");
   winTitle.innerHTML = "😎 סיימת את המשחק ";
+  playSoundEndGame();
   document.querySelector(
     ".timer"
   ).textContent = `הזמן שעבר מתחילת המשחק: ${secondsToFormattedTime(
     timeCounter
   )}`;
   updateShortestTime();
-  setTimeout(() => location.reload(), 3000);
+  setTimeout(() => location.reload(), 3500);
 }
 
 // קיצור דרך להפיכת כל הקלפים לצורך בדיקות
