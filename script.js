@@ -170,6 +170,7 @@ const btn_startGame = document.querySelector(".btn_startGame");
 const playerName = document.querySelector(".playerName");
 const startGame = document.querySelector(".startGame");
 const levels = document.querySelector(".levels");
+const Developed = document.querySelector(".Developed");
 
 let level2 = false;
 
@@ -187,7 +188,7 @@ function startTheGame() {
     startGame.style.display = "none";
     $pairsFound.classList.remove("d-none");
     levels.classList.remove("d-none");
-
+    Developed.classList.add("d-none");
     createTiles(16);
     renderAllTiles();
     return;
